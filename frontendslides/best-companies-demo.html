@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Companies — Preset Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===========================================
+   BEST COMPANIES PRESET — DESIGN TOKENS
+   =========================================== */
+:root {
+    --bg-primary: #FAFAFA;
+    --brand-navy: #161643;
+    --accent-red: #E5181C;
+    --text-primary: #161643;
+    --text-soft: #4A4A6B;
+    --rule: #E5181C;
+    --card-bg: #161643;
+    --card-text: #FAFAFA;
+    --radius: 10px;
+
+    --display-font: 'Manrope', system-ui, sans-serif;
+    --body-font: 'Manrope', system-ui, sans-serif;
+}
+
+/* ===========================================
+   VIEWPORT FITTING: MANDATORY BASE STYLES
+   =========================================== */
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 100%;
+    overflow: hidden;
+    padding: var(--slide-padding);
+}
+
+:root {
+    --title-size: clamp(2rem, 6vw, 5.5rem);
+    --h2-size: clamp(1.5rem, 4vw, 3rem);
+    --h3-size: clamp(1.1rem, 2.5vw, 1.75rem);
+    --body-size: clamp(0.85rem, 1.4vw, 1.15rem);
+    --small-size: clamp(0.65rem, 1vw, 0.85rem);
+    --eyebrow-size: clamp(0.7rem, 1vw, 0.85rem);
+    --stat-size: clamp(8rem, 22vw, 18rem);
+    --slide-padding: clamp(2rem, 6vw, 5rem);
+    --content-gap: clamp(0.75rem, 2vw, 2rem);
+    --element-gap: clamp(0.4rem, 1vw, 1rem);
+}
+
+.card, .container, .content-box {
+    max-width: min(90vw, 1100px);
+}
+
+img, .image-container {
+    max-width: 100%;
+    max-height: min(50vh, 400px);
+    object-fit: contain;
+}
+
+@media (max-height: 700px) {
+    :root {
+        --slide-padding: clamp(1rem, 4vw, 3rem);
+        --content-gap: clamp(0.5rem, 1.5vw, 1.25rem);
+        --title-size: clamp(1.5rem, 5vw, 3.5rem);
+        --stat-size: clamp(6rem, 16vw, 12rem);
+    }
+}
+
+@media (max-height: 600px) {
+    .nav-dots, .keyboard-hint { display: none; }
+}
+
+@media (max-width: 600px) {
+    .pillar-grid { grid-template-columns: 1fr !important; }
+    .logo-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+    html { scroll-behavior: auto; }
+}
+
+/* ===========================================
+   GLOBAL STYLES
+   =========================================== */
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--body-font);
+    font-size: var(--body-size);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+}
+
+h1, h2, h3 {
+    font-family: var(--display-font);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: var(--brand-navy);
+}
+
+p { margin: 0; }
+
+/* ===========================================
+   SIGNATURE: RED LEADING RULE
+   Wax-seal accent above hero headlines
+   =========================================== */
+.red-rule {
+    width: clamp(48px, 6vw, 72px);
+    height: 4px;
+    background: var(--rule);
+    margin-bottom: clamp(1rem, 2vw, 1.75rem);
+    border-radius: 2px;
+}
+
+/* ===========================================
+   SIGNATURE: ABSTRACT GRADIENT ORB
+   CSS-only, low-opacity background motif
+   =========================================== */
+.gradient-orb {
+    position: absolute;
+    width: clamp(300px, 45vw, 600px);
+    height: clamp(300px, 45vw, 600px);
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--brand-navy) 0%, var(--accent-red) 70%, transparent 100%);
+    filter: blur(120px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.gradient-orb.top-right {
+    top: -10%;
+    right: -10%;
+}
+
+.gradient-orb.bottom-left {
+    bottom: -15%;
+    left: -10%;
+}
+
+.slide-content > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===========================================
+   SHARED: EYEBROW & FRAME
+   =========================================== */
+.eyebrow {
+    font-size: var(--eyebrow-size);
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.slide-frame {
+    position: absolute;
+    top: var(--slide-padding);
+    left: var(--slide-padding);
+    right: var(--slide-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    font-size: var(--small-size);
+    color: var(--text-soft);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Brand wordmark — red "b" circle is ALWAYS red per brand guideline */
+.slide-frame .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    font-family: var(--display-font);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    line-height: 1;
+}
+
+.slide-frame .brand-mark::before {
+    content: 'b';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background: #E5181C;
+    color: white;
+    font-weight: 800;
+    font-size: 1em;
+    line-height: 1;
+    padding-bottom: 0.05em;
+}
+
+.slide-frame .brand-mark .wm-best { color: var(--accent-red); }
+.slide-frame .brand-mark .wm-co   { color: var(--brand-navy); }
+.slide-frame .brand-mark .wm-tm {
+    font-size: 0.45em;
+    vertical-align: super;
+    margin-left: 0.15em;
+    color: var(--text-soft);
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+/* ===========================================
+   SLIDE 1 — TITLE
+   =========================================== */
+.title-slide .slide-content {
+    justify-content: center;
+    padding-top: clamp(5rem, 10vh, 8rem);
+}
+
+.title-slide h1 {
+    font-size: var(--title-size);
+    max-width: 18ch;
+}
+
+.title-slide .subtitle {
+    font-size: clamp(1rem, 1.7vw, 1.4rem);
+    color: var(--text-soft);
+    margin-top: clamp(1rem, 2vw, 1.75rem);
+    max-width: 50ch;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.title-slide .meta {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    display: flex;
+    align-items: center;
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    font-size: var(--small-size);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-soft);
+    font-weight: 500;
+}
+
+.title-slide .meta::before {
+    content: '';
+    width: clamp(20px, 3vw, 32px);
+    height: 1px;
+    background: var(--text-soft);
+}
+
+/* ===========================================
+   SLIDE 2 — STAT SLAB
+   =========================================== */
+.stat-slide .slide-content {
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.stat-figure {
+    font-size: var(--stat-size);
+    font-weight: 800;
+    color: var(--brand-navy);
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+}
+
+.stat-bar {
+    width: clamp(120px, 16vw, 200px);
+    height: 6px;
+    background: var(--accent-red);
+    margin: clamp(1rem, 2.5vw, 2rem) 0 clamp(1.25rem, 2.5vw, 2rem);
+    border-radius: 3px;
+}
+
+.stat-label {
+    font-size: clamp(1rem, 1.8vw, 1.5rem);
+    font-weight: 700;
+    color: var(--brand-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    max-width: 24ch;
+    line-height: 1.2;
+}
+
+.stat-context {
+    margin-top: clamp(1rem, 2vw, 1.5rem);
+    font-size: var(--body-size);
+    color: var(--text-soft);
+    max-width: 50ch;
+    line-height: 1.5;
+}
+
+/* ===========================================
+   SLIDE 3 — THREE-PILLAR GRID
+   =========================================== */
+.pillar-slide .slide-content {
+    justify-content: center;
+    gap: clamp(1.5rem, 3.5vw, 3rem);
+}
+
+.pillar-slide h2 {
+    font-size: var(--h2-size);
+    max-width: 22ch;
+}
+
+.pillar-slide .subhead {
+    font-size: var(--body-size);
+    color: var(--text-soft);
+    margin-top: clamp(0.5rem, 1vw, 0.75rem);
+    max-width: 56ch;
+    line-height: 1.5;
+}
+
+.pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.75rem, 1.5vw, 1.5rem);
+    margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.pillar-card {
+    background: var(--card-bg);
+    color: var(--card-text);
+    padding: clamp(1.25rem, 2.5vw, 2.25rem);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1.5vw, 1.25rem);
+    transition: transform 0.4s ease;
+}
+
+.pillar-card:hover {
+    transform: translateY(-4px);
+}
+
+.pillar-ordinal {
+    font-size: clamp(0.75rem, 1vw, 0.85rem);
+    font-weight: 800;
+    color: var(--accent-red);
+    letter-spacing: 0.2em;
+}
+
+.pillar-card h3 {
+    font-size: clamp(1.4rem, 2.5vw, 2.25rem);
+    color: var(--card-text);
+    font-weight: 800;
+}
+
+.pillar-card p {
+    font-size: var(--body-size);
+    color: rgba(250, 250, 250, 0.75);
+    line-height: 1.5;
+}
+
+/* ===========================================
+   SLIDE 4 — TRUST STRIP
+   =========================================== */
+.trust-slide .slide-content {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.trust-slide h2 {
+    font-size: var(--h2-size);
+    max-width: 22ch;
+}
+
+.trust-slide .subhead {
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
+    color: var(--text-soft);
+    margin-top: clamp(0.5rem, 1vw, 0.75rem);
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 400;
+}
+
+.logo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.5rem, 1.5vw, 1.5rem) clamp(1rem, 3vw, 3rem);
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.logo-cell {
+    font-family: var(--display-font);
+    font-weight: 800;
+    font-size: clamp(0.85rem, 1.5vw, 1.25rem);
+    color: var(--text-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: clamp(0.5rem, 1vw, 0.75rem) 0;
+    opacity: 0.65;
+    filter: grayscale(100%);
+    transition: opacity 0.3s ease;
+}
+
+.logo-cell:hover { opacity: 1; }
+
+/* ===========================================
+   SLIDE 5 — PULL QUOTE
+   =========================================== */
+.quote-slide .slide-content {
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.quote-rule {
+    width: 4px;
+    height: clamp(180px, 35vh, 320px);
+    background: var(--accent-red);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.quote-body {
+    flex: 1;
+}
+
+.quote-body blockquote {
+    font-size: clamp(1.5rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--brand-navy);
+    margin: 0;
+    max-width: 28ch;
+}
+
+.quote-attribution {
+    margin-top: clamp(1.5rem, 3vw, 2.25rem);
+    font-size: var(--small-size);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-soft);
+    font-weight: 600;
+}
+
+.quote-attribution strong {
+    color: var(--brand-navy);
+    font-weight: 700;
+    margin-right: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+/* ===========================================
+   REVEAL ANIMATIONS
+   =========================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal.delay-1 { transition-delay: 0.1s; }
+.reveal.delay-2 { transition-delay: 0.25s; }
+.reveal.delay-3 { transition-delay: 0.4s; }
+.reveal.delay-4 { transition-delay: 0.55s; }
+.reveal.delay-5 { transition-delay: 0.7s; }
+
+/* Width-based reveal for the red rule */
+.rule-reveal {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s cubic-bezier(0.6, 0, 0.4, 1);
+}
+
+.rule-reveal.visible {
+    transform: scaleX(1);
+}
+
+/* ===========================================
+   NAV DOTS & PROGRESS BAR
+   =========================================== */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--accent-red);
+    width: 0%;
+    transition: width 0.4s ease;
+    z-index: 100;
+}
+
+.nav-dots {
+    position: fixed;
+    right: clamp(1rem, 2vw, 1.5rem);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1vw, 0.75rem);
+    z-index: 100;
+}
+
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-soft);
+    opacity: 0.3;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+    opacity: 1;
+    background: var(--accent-red);
+    transform: scale(1.4);
+}
+
+.keyboard-hint {
+    position: fixed;
+    bottom: clamp(1rem, 2vw, 1.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--small-size);
+    color: var(--text-soft);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    z-index: 100;
+    font-weight: 500;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+<div class="keyboard-hint">Use ← → or scroll</div>
+
+<!-- ============================================
+     SLIDE 1 — TITLE
+     ============================================ -->
+<section class="slide title-slide" data-slide="1">
+    <div class="gradient-orb top-right"></div>
+    <div class="slide-frame">
+        <span class="brand-mark">BEST COMPANIES</span>
+        <span>01 / 05</span>
+    </div>
+    <div class="slide-content">
+        <div class="red-rule rule-reveal reveal"></div>
+        <div class="eyebrow reveal delay-1">State of Engagement · 2026</div>
+        <h1 class="reveal delay-2">Know your people, grow your business.</h1>
+        <p class="subtitle reveal delay-3">
+            Findings from 145,000 employees, revealing the workforce trends defining the year ahead.
+        </p>
+        <div class="meta reveal delay-4">
+            <span>Best Companies Limited · 25 Years</span>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SLIDE 2 — STAT SLAB
+     ============================================ -->
+<section class="slide stat-slide" data-slide="2">
+    <div class="slide-frame">
+        <span class="brand-mark">BEST COMPANIES</span>
+        <span>02 / 05</span>
+    </div>
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Engagement Dividend</div>
+        <div class="stat-figure reveal delay-1">27<span style="color: var(--accent-red);">%</span></div>
+        <div class="stat-bar rule-reveal reveal delay-2"></div>
+        <div class="stat-label reveal delay-3">Increase in employee satisfaction</div>
+        <p class="stat-context reveal delay-4">
+            Organisations that began as 'Ones to Watch' and went on to achieve 3-star accreditation outperform on every key engagement metric.
+        </p>
+    </div>
+</section>
+
+<!-- ============================================
+     SLIDE 3 — THREE-PILLAR GRID
+     ============================================ -->
+<section class="slide pillar-slide" data-slide="3">
+    <div class="gradient-orb bottom-left"></div>
+    <div class="slide-frame">
+        <span class="brand-mark">BEST COMPANIES</span>
+        <span>03 / 05</span>
+    </div>
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Workforce Method</div>
+        <h2 class="reveal delay-1">Three steps from insight to impact.</h2>
+        <p class="subhead reveal delay-2">A complete platform that takes you from measurement, through analysis, to leadership development.</p>
+        <div class="pillar-grid">
+            <div class="pillar-card reveal delay-3">
+                <span class="pillar-ordinal">01 — Engage</span>
+                <h3>Measure</h3>
+                <p>Science-backed surveys uncover what's really going on across your organisation.</p>
+            </div>
+            <div class="pillar-card reveal delay-4">
+                <span class="pillar-ordinal">02 — Analyse</span>
+                <h3>Improve</h3>
+                <p>Advanced analytics reveal trends, opportunities and exactly where to act first.</p>
+            </div>
+            <div class="pillar-card reveal delay-5">
+                <span class="pillar-ordinal">03 — Develop</span>
+                <h3>Elevate</h3>
+                <p>Personalised, data-driven coaching transforms your managers into great leaders.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SLIDE 4 — TRUST STRIP
+     ============================================ -->
+<section class="slide trust-slide" data-slide="4">
+    <div class="slide-frame">
+        <span class="brand-mark">BEST COMPANIES</span>
+        <span>04 / 05</span>
+    </div>
+    <div class="slide-content">
+        <div class="eyebrow reveal">6.5 Million Voices Heard</div>
+        <h2 class="reveal delay-1">Trusted by the best.</h2>
+        <p class="subhead reveal delay-2">People-first organisations turning workforce intelligence into measurable change.</p>
+        <div class="logo-grid">
+            <div class="logo-cell reveal delay-3">Danske Bank</div>
+            <div class="logo-cell reveal delay-3">Toyota</div>
+            <div class="logo-cell reveal delay-3">NHS BSA</div>
+            <div class="logo-cell reveal delay-3">UK Power</div>
+            <div class="logo-cell reveal delay-4">Hastings Direct</div>
+            <div class="logo-cell reveal delay-4">Roadchef</div>
+            <div class="logo-cell reveal delay-4">Benefact Group</div>
+            <div class="logo-cell reveal delay-4">Go Ape</div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SLIDE 5 — PULL QUOTE
+     ============================================ -->
+<section class="slide quote-slide" data-slide="5">
+    <div class="gradient-orb top-right"></div>
+    <div class="slide-frame">
+        <span class="brand-mark">BEST COMPANIES</span>
+        <span>05 / 05</span>
+    </div>
+    <div class="slide-content">
+        <div class="quote-rule reveal"></div>
+        <div class="quote-body">
+            <blockquote class="reveal delay-1">
+                "Great things happen when you understand your workforce."
+            </blockquote>
+            <div class="quote-attribution reveal delay-3">
+                <strong>Best Companies</strong> — 25 Years of Workforce Intelligence
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// ===========================================
+// SLIDE PRESENTATION CONTROLLER
+// ===========================================
+class SlidePresentation {
+    constructor() {
+        this.slides = document.querySelectorAll('.slide');
+        this.totalSlides = this.slides.length;
+        this.currentSlide = 0;
+        this.progressBar = document.getElementById('progressBar');
+        this.navDots = document.getElementById('navDots');
+
+        this.buildNavDots();
+        this.observeSlides();
+        this.bindEvents();
+        this.updateProgress();
+    }
+
+    buildNavDots() {
+        this.slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.addEventListener('click', () => this.goToSlide(i));
+            this.navDots.appendChild(dot);
+        });
+    }
+
+    observeSlides() {
+        const slideObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = parseInt(entry.target.dataset.slide) - 1;
+                    this.currentSlide = idx;
+                    this.updateProgress();
+                    this.updateDots();
+
+                    entry.target.querySelectorAll('.reveal').forEach(el => {
+                        el.classList.add('visible');
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        this.slides.forEach(slide => slideObserver.observe(slide));
+    }
+
+    updateProgress() {
+        const pct = ((this.currentSlide + 1) / this.totalSlides) * 100;
+        this.progressBar.style.width = pct + '%';
+    }
+
+    updateDots() {
+        this.navDots.querySelectorAll('.nav-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === this.currentSlide);
+        });
+    }
+
+    goToSlide(idx) {
+        if (idx < 0 || idx >= this.totalSlides) return;
+        this.slides[idx].scrollIntoView({ behavior: 'smooth' });
+    }
+
+    bindEvents() {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+                e.preventDefault();
+                this.goToSlide(this.currentSlide + 1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                this.goToSlide(this.currentSlide - 1);
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                this.goToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                this.goToSlide(this.totalSlides - 1);
+            }
+        });
+
+        // Touch swipe
+        let touchStartY = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            const touchEndY = e.changedTouches[0].clientY;
+            const diff = touchStartY - touchEndY;
+            if (Math.abs(diff) > 50) {
+                this.goToSlide(this.currentSlide + (diff > 0 ? 1 : -1));
+            }
+        }, { passive: true });
+    }
+}
+
+new SlidePresentation();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Companies Modern — Preset Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===========================================
+   BEST COMPANIES MODERN — DESIGN TOKENS
+   =========================================== */
+:root {
+    --bg-primary: #FAFAFA;
+    --brand-teal: #1AA9A9;
+    --brand-teal-soft: #E8F5F5;
+    --ink-navy: #1A2B45;
+    --ink-soft: #5A6B85;
+    --card-bg: #FFFFFF;
+    --shadow-soft: 0 8px 32px rgba(26, 43, 69, 0.08);
+    --shadow-lift: 0 16px 48px rgba(26, 43, 69, 0.12);
+
+    /* 8-factor multi-colour palette */
+    --c-purple: #9B36A0;
+    --c-blue:   #C5D6E8;
+    --c-orange: #F4A460;
+    --c-coral:  #E5818E;
+    --c-lime:   #8DC63F;
+    --c-pink:   #E84C8E;
+    --c-yellow: #F5C13E;
+    --c-sky:    #5AB8E8;
+
+    --radius: 20px;
+    --radius-pill: 999px;
+
+    --display-font: 'Manrope', system-ui, sans-serif;
+    --body-font: 'Manrope', system-ui, sans-serif;
+}
+
+/* ===========================================
+   VIEWPORT FITTING: MANDATORY BASE STYLES
+   =========================================== */
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.slide {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 100%;
+    overflow: hidden;
+    padding: var(--slide-padding);
+    position: relative;
+    z-index: 2;
+}
+
+:root {
+    --title-size: clamp(2rem, 5.5vw, 5rem);
+    --h2-size: clamp(1.5rem, 4vw, 3rem);
+    --h3-size: clamp(1.1rem, 2vw, 1.5rem);
+    --body-size: clamp(0.85rem, 1.4vw, 1.15rem);
+    --small-size: clamp(0.65rem, 1vw, 0.85rem);
+    --eyebrow-size: clamp(0.7rem, 1vw, 0.85rem);
+    --stat-size: clamp(4rem, 9vw, 7.5rem);
+    --slide-padding: clamp(2rem, 5vw, 4.5rem);
+    --content-gap: clamp(0.75rem, 2vw, 2rem);
+    --element-gap: clamp(0.4rem, 1vw, 1rem);
+}
+
+@media (max-height: 700px) {
+    :root {
+        --slide-padding: clamp(1rem, 4vw, 3rem);
+        --title-size: clamp(1.5rem, 4.5vw, 3.5rem);
+        --stat-size: clamp(3rem, 7vw, 5.5rem);
+    }
+}
+
+@media (max-height: 600px) {
+    .nav-dots, .keyboard-hint { display: none; }
+}
+
+@media (max-width: 700px) {
+    .pillar-grid, .stat-grid { grid-template-columns: 1fr !important; }
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .hero-visuals { display: none !important; }
+    .factor-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+    html { scroll-behavior: auto; }
+}
+
+/* ===========================================
+   GLOBAL STYLES
+   =========================================== */
+body {
+    background: var(--bg-primary);
+    color: var(--ink-navy);
+    font-family: var(--body-font);
+    font-size: var(--body-size);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+}
+
+h1, h2, h3 {
+    font-family: var(--display-font);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin: 0;
+    color: var(--ink-navy);
+}
+
+p { margin: 0; }
+
+/* ===========================================
+   SIGNATURE: ORGANIC BLOB SHAPES
+   Solid colour, asymmetric border-radius
+   =========================================== */
+.blob {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(0);
+}
+
+.blob-purple {
+    background: var(--c-purple);
+    opacity: 0.18;
+    width: clamp(280px, 35vw, 480px);
+    height: clamp(280px, 35vw, 480px);
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+}
+
+.blob-blue {
+    background: var(--c-blue);
+    opacity: 0.6;
+    width: clamp(240px, 30vw, 400px);
+    height: clamp(240px, 30vw, 400px);
+    border-radius: 40% 60% 50% 50% / 60% 30% 70% 40%;
+}
+
+.blob-teal {
+    background: var(--brand-teal);
+    opacity: 0.12;
+    width: clamp(220px, 28vw, 380px);
+    height: clamp(220px, 28vw, 380px);
+    border-radius: 50% 50% 60% 40% / 40% 60% 50% 50%;
+}
+
+.blob.top-right    { top: -8%; right: -10%; }
+.blob.bottom-right { bottom: -12%; right: -8%; }
+.blob.bottom-left  { bottom: -10%; left: -8%; }
+.blob.top-left     { top: -10%; left: -10%; }
+.blob.mid-right    { top: 30%; right: -8%; }
+.blob.mid-left     { top: 35%; left: -10%; }
+
+/* ===========================================
+   SHARED: EYEBROW & FRAME
+   =========================================== */
+.eyebrow {
+    font-size: var(--eyebrow-size);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--brand-teal);
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.slide-frame {
+    position: absolute;
+    top: var(--slide-padding);
+    left: var(--slide-padding);
+    right: var(--slide-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 3;
+    font-size: var(--small-size);
+    color: var(--ink-soft);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Lowercase wordmark — brand mark is ALWAYS red per brand guideline */
+.wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    font-family: var(--display-font);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: none;
+    font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+    line-height: 1;
+}
+
+.wordmark::before {
+    content: 'b';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background: #E5181C; /* Brand red — never change */
+    color: white;
+    font-weight: 800;
+    font-size: 1em;
+    line-height: 1;
+    padding-bottom: 0.05em;
+}
+
+.wordmark .wm-best { color: #E5181C; }
+.wordmark .wm-co   { color: var(--ink-navy); }
+.wordmark .wm-tm {
+    font-size: 0.45em;
+    vertical-align: super;
+    margin-left: 0.15em;
+    color: var(--ink-soft);
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+/* ===========================================
+   SLIDE 1 — TITLE WITH FLOATING WIDGETS
+   =========================================== */
+.title-slide .slide-content {
+    justify-content: center;
+    padding-top: clamp(5rem, 10vh, 8rem);
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: center;
+}
+
+.title-slide h1 {
+    font-size: var(--title-size);
+    max-width: 14ch;
+}
+
+.title-slide .subtitle {
+    font-size: clamp(1rem, 1.6vw, 1.35rem);
+    color: var(--ink-soft);
+    margin-top: clamp(1rem, 2vw, 1.75rem);
+    max-width: 38ch;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.title-slide .cta-row {
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.btn-primary {
+    background: var(--brand-teal);
+    color: white;
+    border: none;
+    padding: clamp(0.75rem, 1.2vw, 1rem) clamp(1.5rem, 2.5vw, 2rem);
+    border-radius: var(--radius-pill);
+    font-family: var(--display-font);
+    font-weight: 700;
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+}
+
+.tag-meta {
+    font-size: var(--small-size);
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+}
+
+/* Hero visual cluster */
+.hero-visuals {
+    position: relative;
+    height: clamp(320px, 45vh, 480px);
+}
+
+.widget-card {
+    position: absolute;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lift);
+    padding: clamp(1rem, 1.8vw, 1.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+/* Conic-gradient gauge widget */
+.widget-gauge {
+    top: 5%;
+    left: -5%;
+    width: clamp(140px, 16vw, 200px);
+    height: clamp(140px, 16vw, 200px);
+}
+
+.gauge-circle {
+    width: clamp(85px, 11vw, 130px);
+    height: clamp(85px, 11vw, 130px);
+    border-radius: 50%;
+    background: conic-gradient(
+        from -135deg,
+        var(--brand-teal) 0deg,
+        var(--brand-teal) 270deg,
+        #E5EAF0 270deg,
+        #E5EAF0 360deg
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.gauge-circle::before {
+    content: '';
+    position: absolute;
+    inset: 14%;
+    background: white;
+    border-radius: 50%;
+}
+
+.gauge-value {
+    position: relative;
+    font-family: var(--display-font);
+    font-weight: 800;
+    font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+    color: var(--ink-navy);
+}
+
+.widget-label {
+    margin-top: clamp(0.5rem, 1vw, 0.75rem);
+    font-size: clamp(0.6rem, 0.85vw, 0.75rem);
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+}
+
+/* Bar chart widget */
+.widget-bars {
+    bottom: 8%;
+    right: -5%;
+    width: clamp(150px, 17vw, 210px);
+}
+
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(6px, 0.8vw, 10px);
+    height: clamp(60px, 7vw, 90px);
+    padding: 0 0.5rem;
+}
+
+.bar {
+    width: clamp(14px, 1.6vw, 22px);
+    background: var(--brand-teal);
+    border-radius: 4px 4px 0 0;
+}
+
+.bar.b1 { height: 40%; opacity: 0.4; }
+.bar.b2 { height: 65%; opacity: 0.7; }
+.bar.b3 { height: 95%; opacity: 1; }
+.bar.b4 { height: 50%; opacity: 0.5; }
+
+/* Avatar circle */
+.hero-avatar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(180px, 22vw, 280px);
+    height: clamp(180px, 22vw, 280px);
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand-teal) 0%, var(--c-purple) 100%);
+    z-index: 1;
+    box-shadow: var(--shadow-lift);
+}
+
+.hero-avatar::after {
+    content: '';
+    position: absolute;
+    inset: 8%;
+    background: var(--c-blue);
+    border-radius: 50%;
+    opacity: 0.4;
+}
+
+/* ===========================================
+   SLIDE 2 — STAT TRIO (FLOATING CARDS)
+   =========================================== */
+.stat-slide .slide-content {
+    justify-content: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.stat-slide h2 {
+    font-size: var(--h2-size);
+    max-width: 22ch;
+}
+
+.stat-slide .subhead {
+    font-size: var(--body-size);
+    color: var(--ink-soft);
+    margin-top: clamp(0.5rem, 1vw, 0.75rem);
+    max-width: 56ch;
+    line-height: 1.5;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2vw, 1.75rem);
+    margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: clamp(1.25rem, 2.5vw, 2.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.4rem, 0.75vw, 0.75rem);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+}
+
+.stat-figure {
+    font-size: var(--stat-size);
+    font-weight: 800;
+    color: var(--brand-teal);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+}
+
+.stat-label {
+    font-size: clamp(0.85rem, 1.2vw, 1.05rem);
+    font-weight: 700;
+    color: var(--ink-navy);
+    line-height: 1.3;
+}
+
+.stat-context {
+    font-size: var(--small-size);
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin-top: 0.25rem;
+}
+
+/* ===========================================
+   SLIDE 3 — 8 FACTOR CHIP GRID
+   =========================================== */
+.factor-slide .slide-content {
+    justify-content: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.factor-slide h2 {
+    font-size: var(--h2-size);
+    max-width: 22ch;
+}
+
+.factor-slide .subhead {
+    font-size: var(--body-size);
+    color: var(--ink-soft);
+    margin-top: clamp(0.5rem, 1vw, 0.75rem);
+    max-width: 56ch;
+    line-height: 1.5;
+}
+
+.factor-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.75rem, 1.5vw, 1.25rem);
+    margin-top: clamp(1rem, 2vw, 1.5rem);
+    max-width: 1100px;
+}
+
+.factor-chip {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: clamp(1rem, 1.8vw, 1.5rem);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(0.5rem, 1vw, 0.75rem);
+    border-top: 4px solid;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.factor-chip:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+}
+
+.factor-icon {
+    width: clamp(36px, 4vw, 48px);
+    height: clamp(36px, 4vw, 48px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+    font-family: var(--display-font);
+}
+
+.factor-name {
+    font-weight: 700;
+    color: var(--ink-navy);
+    font-size: clamp(0.85rem, 1.1vw, 1rem);
+    line-height: 1.2;
+}
+
+/* Per-factor colours */
+.factor-chip.f1 { border-top-color: var(--c-orange); }
+.factor-chip.f1 .factor-icon { background: var(--c-orange); }
+.factor-chip.f2 { border-top-color: var(--c-coral); }
+.factor-chip.f2 .factor-icon { background: var(--c-coral); }
+.factor-chip.f3 { border-top-color: var(--c-sky); }
+.factor-chip.f3 .factor-icon { background: var(--c-sky); }
+.factor-chip.f4 { border-top-color: var(--c-purple); }
+.factor-chip.f4 .factor-icon { background: var(--c-purple); }
+.factor-chip.f5 { border-top-color: var(--c-pink); }
+.factor-chip.f5 .factor-icon { background: var(--c-pink); }
+.factor-chip.f6 { border-top-color: var(--c-lime); }
+.factor-chip.f6 .factor-icon { background: var(--c-lime); }
+.factor-chip.f7 { border-top-color: var(--brand-teal); }
+.factor-chip.f7 .factor-icon { background: var(--brand-teal); }
+.factor-chip.f8 { border-top-color: var(--c-yellow); }
+.factor-chip.f8 .factor-icon { background: var(--c-yellow); }
+
+/* ===========================================
+   SLIDE 4 — THREE PILLARS WITH COLOURED ACCENTS
+   =========================================== */
+.pillar-slide .slide-content {
+    justify-content: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.pillar-slide h2 {
+    font-size: var(--h2-size);
+    max-width: 22ch;
+}
+
+.pillar-slide .subhead {
+    font-size: var(--body-size);
+    color: var(--ink-soft);
+    margin-top: clamp(0.5rem, 1vw, 0.75rem);
+    max-width: 56ch;
+    line-height: 1.5;
+}
+
+.pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2vw, 1.75rem);
+    margin-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.pillar-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-soft);
+    padding: clamp(1.5rem, 2.5vw, 2.25rem);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1vw, 1rem);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.pillar-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lift);
+}
+
+.pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+}
+
+.pillar-card.p1::before { background: var(--brand-teal); }
+.pillar-card.p2::before { background: var(--c-purple); }
+.pillar-card.p3::before { background: var(--c-orange); }
+
+.pillar-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-pill);
+    font-size: clamp(0.65rem, 0.85vw, 0.75rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    align-self: flex-start;
+}
+
+.pillar-card.p1 .pillar-tag { background: var(--brand-teal-soft); color: var(--brand-teal); }
+.pillar-card.p2 .pillar-tag { background: rgba(155, 54, 160, 0.12); color: var(--c-purple); }
+.pillar-card.p3 .pillar-tag { background: rgba(244, 164, 96, 0.18); color: #B8651E; }
+
+.pillar-card h3 {
+    font-size: clamp(1.4rem, 2.2vw, 2rem);
+    margin-top: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+.pillar-card p {
+    font-size: var(--body-size);
+    color: var(--ink-soft);
+    line-height: 1.5;
+}
+
+/* ===========================================
+   SLIDE 5 — QUOTE WITH AVATAR
+   =========================================== */
+.quote-slide .slide-content {
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4rem);
+}
+
+.quote-avatar-wrap {
+    flex-shrink: 0;
+    position: relative;
+    width: clamp(160px, 22vw, 280px);
+    height: clamp(160px, 22vw, 280px);
+}
+
+.quote-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand-teal) 0%, var(--c-purple) 100%);
+    box-shadow: var(--shadow-lift);
+    position: relative;
+    overflow: hidden;
+}
+
+.quote-avatar::after {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    background: var(--c-blue);
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.quote-avatar-badge {
+    position: absolute;
+    bottom: -5%;
+    right: -5%;
+    background: white;
+    border-radius: 50%;
+    width: 28%;
+    height: 28%;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quote-avatar-badge::before {
+    content: '★';
+    color: var(--c-yellow);
+    font-size: clamp(1.2rem, 2vw, 2rem);
+}
+
+.quote-body {
+    flex: 1;
+    max-width: 32ch;
+}
+
+.quote-mark {
+    font-family: var(--display-font);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    color: var(--brand-teal);
+    line-height: 0.7;
+    margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+    font-weight: 800;
+}
+
+.quote-body blockquote {
+    font-size: clamp(1.25rem, 2.5vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--ink-navy);
+    margin: 0;
+}
+
+.quote-attribution {
+    margin-top: clamp(1.25rem, 2.5vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.quote-attribution .name {
+    font-weight: 800;
+    color: var(--ink-navy);
+    font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+}
+
+.quote-attribution .role {
+    font-size: var(--small-size);
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+}
+
+/* ===========================================
+   REVEAL ANIMATIONS
+   =========================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal.delay-1 { transition-delay: 0.1s; }
+.reveal.delay-2 { transition-delay: 0.2s; }
+.reveal.delay-3 { transition-delay: 0.3s; }
+.reveal.delay-4 { transition-delay: 0.4s; }
+.reveal.delay-5 { transition-delay: 0.5s; }
+.reveal.delay-6 { transition-delay: 0.6s; }
+.reveal.delay-7 { transition-delay: 0.7s; }
+.reveal.delay-8 { transition-delay: 0.8s; }
+
+/* ===========================================
+   NAV DOTS & PROGRESS BAR
+   =========================================== */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--brand-teal);
+    width: 0%;
+    transition: width 0.4s ease;
+    z-index: 100;
+}
+
+.nav-dots {
+    position: fixed;
+    right: clamp(1rem, 2vw, 1.5rem);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1vw, 0.75rem);
+    z-index: 100;
+}
+
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ink-soft);
+    opacity: 0.3;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+    opacity: 1;
+    background: var(--brand-teal);
+    transform: scale(1.4);
+}
+
+.keyboard-hint {
+    position: fixed;
+    bottom: clamp(1rem, 2vw, 1.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--small-size);
+    color: var(--ink-soft);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    z-index: 100;
+    font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<nav class="nav-dots" id="navDots" aria-label="Slide navigation"></nav>
+<div class="keyboard-hint">Use ← → or scroll</div>
+
+<!-- ============================================
+     SLIDE 1 — TITLE WITH FLOATING WIDGETS
+     ============================================ -->
+<section class="slide title-slide" data-slide="1">
+    <div class="blob blob-purple top-right"></div>
+    <div class="blob blob-blue bottom-left"></div>
+    <div class="slide-frame">
+        <span class="wordmark"><span class="wm-best">best</span> <span class="wm-co">companies</span><span class="wm-tm">TM</span></span>
+        <span>01 / 05</span>
+    </div>
+    <div class="slide-content">
+        <div class="hero-grid">
+            <div>
+                <div class="eyebrow reveal">State of Engagement · 2026</div>
+                <h1 class="reveal delay-1">The future of workforce engagement.</h1>
+                <p class="subtitle reveal delay-2">
+                    Findings from 145,000 employees, revealing the trends shaping how people-first organisations win.
+                </p>
+                <div class="cta-row reveal delay-3">
+                    <button class="btn-primary">Download report →</button>
+                    <span class="tag-meta">25 years · 6.5M voices</span>
+                </div>
+            </div>
+            <div class="hero-visuals">
+                <div class="hero-avatar reveal delay-2"></div>
+                <div class="widget-card widget-gauge reveal delay-3">
+                    <div class="gauge-circle">
+                        <span class="gauge-value">74.2</span>
+                    </div>
+                    <span class="widget-label">Engagement</span>
+                </div>
+                <div class="widget-card widget-bars reveal delay-4">
+                    <div class="bar-chart">
+                        <div class="bar b1"></div>
+                        <div class="bar b2"></div>
+                        <div class="bar b3"></div>
+                        <div class="bar b4"></div>
+                    </div>
+                    <span class="widget-label">YoY Growth</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SLIDE 2 — STAT TRIO
+     ============================================ -->
+<section class="slide stat-slide" data-slide="2">
+    <div class="blob blob-teal mid-right"></div>
+    <div class="slide-frame">
+        <span class="wordmark"><span class="wm-best">best</span> <span class="wm-co">companies</span><span class="wm-tm">TM</span></span>
+        <span>02 / 05</span>
+    </div>
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Engagement Dividend</div>
+        <h2 class="reveal delay-1">Three numbers that change the conversation.</h2>
+        <p class="subhead reveal delay-2">Organisations that began as 'Ones to Watch' and went on to achieve 3-star accreditation outperform on every key metric.</p>
+        <div class="stat-grid">
+            <div class="stat-card reveal delay-3">
+                <div class="stat-figure">27<span style="font-size: 0.6em;">%</span></div>
+                <div class="stat-label">Increase in employee satisfaction</div>
+                <p class="stat-context">Year-on-year across accredited organisations</p>
+            </div>
+            <div class="stat-card reveal delay-4">
+                <div class="stat-figure">23<span style="font-size: 0.6em;">%</span></div>
+                <div class="stat-label">Decrease in employee turnover</div>
+                <p class="stat-context">Saving recruitment + training costs at scale</p>
+            </div>
+            <div class="stat-card reveal delay-5">
+                <div class="stat-figure">23<span style="font-size: 0.6em;">%</span></div>
+                <div class="stat-label">Increase in customer service</div>
+                <p class="stat-context">Engaged people serve customers better</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SLIDE 3 — 8 FACTOR MODEL
+     ============================================ -->
+<section class="slide factor-slide" data-slide="3">
+    <div class="blob blob-purple bottom-right"></div>
+    <div class="slide-frame">
+        <span class="wordmark"><span class="wm-best">best</span> <span class="wm-co">companies</span><span class="wm-tm">TM</span></span>
+        <span>03 / 05</span>
+    </div>
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Best Companies Method</div>
+        <h2 class="reveal delay-1">Eight factors. One complete picture.</h2>
+        <p class="subhead reveal delay-2">A research-backed model that reveals what's really driving — or holding back — your workforce.</p>
+        <div class="factor-grid">
+            <div class="factor-chip f1 reveal delay-3">
+                <div class="factor-icon">MT</div>
+                <span class="factor-name">My Team</span>
+            </div>
+            <div class="factor-chip f2 reveal delay-3">
+                <div class="factor-icon">LD</div>
+                <span class="factor-name">Leadership</span>
+            </div>
+            <div class="factor-chip f3 reveal delay-4">
+                <div class="factor-icon">MM</div>
+                <span class="factor-name">My Manager</span>
+            </div>
+            <div class="factor-chip f4 reveal delay-4">
+                <div class="factor-icon">PG</div>
+                <span class="factor-name">Personal Growth</span>
+            </div>
+            <div class="factor-chip f5 reveal delay-5">
+                <div class="factor-icon">MC</div>
+                <span class="factor-name">My Company</span>
+            </div>
+            <div class="factor-chip f6 reveal delay-5">
+                <div class="factor-icon">WB</div>
+                <span class="factor-name">Wellbeing</span>
+            </div>
+            <div class="factor-chip f7 reveal delay-6">
+                <div class="factor-icon">FD</div>
+                <span class="factor-name">Fair Deal</span>
+            </div>
+            <div class="factor-chip f8 reveal delay-6">
+                <div class="factor-icon">GB</div>
+                <span class="factor-name">Giving Back</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SLIDE 4 — THREE PILLARS
+     ============================================ -->
+<section class="slide pillar-slide" data-slide="4">
+    <div class="blob blob-blue top-left"></div>
+    <div class="slide-frame">
+        <span class="wordmark"><span class="wm-best">best</span> <span class="wm-co">companies</span><span class="wm-tm">TM</span></span>
+        <span>04 / 05</span>
+    </div>
+    <div class="slide-content">
+        <div class="eyebrow reveal">The Platform</div>
+        <h2 class="reveal delay-1">From insight to action to leadership.</h2>
+        <p class="subhead reveal delay-2">A complete platform that takes you all the way — measure honestly, improve strategically, develop your leaders.</p>
+        <div class="pillar-grid">
+            <div class="pillar-card p1 reveal delay-3">
+                <span class="pillar-tag">Engage</span>
+                <h3>Measure</h3>
+                <p>Science-backed surveys uncover what's really going on across your organisation.</p>
+            </div>
+            <div class="pillar-card p2 reveal delay-4">
+                <span class="pillar-tag">Analyse</span>
+                <h3>Improve</h3>
+                <p>Advanced analytics surface trends, opportunities and exactly where to act first.</p>
+            </div>
+            <div class="pillar-card p3 reveal delay-5">
+                <span class="pillar-tag">Develop</span>
+                <h3>Elevate</h3>
+                <p>Personalised, data-driven coaching transforms your managers into great leaders.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================
+     SLIDE 5 — QUOTE WITH AVATAR
+     ============================================ -->
+<section class="slide quote-slide" data-slide="5">
+    <div class="blob blob-teal top-right"></div>
+    <div class="blob blob-purple bottom-left"></div>
+    <div class="slide-frame">
+        <span class="wordmark"><span class="wm-best">best</span> <span class="wm-co">companies</span><span class="wm-tm">TM</span></span>
+        <span>05 / 05</span>
+    </div>
+    <div class="slide-content">
+        <div class="quote-avatar-wrap reveal">
+            <div class="quote-avatar"></div>
+            <div class="quote-avatar-badge"></div>
+        </div>
+        <div class="quote-body">
+            <div class="quote-mark reveal delay-1">"</div>
+            <blockquote class="reveal delay-2">
+                Great things happen when you understand your workforce.
+            </blockquote>
+            <div class="quote-attribution reveal delay-3">
+                <span class="name">Best Companies</span>
+                <span class="role">25 Years of Workforce Intelligence</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+class SlidePresentation {
+    constructor() {
+        this.slides = document.querySelectorAll('.slide');
+        this.totalSlides = this.slides.length;
+        this.currentSlide = 0;
+        this.progressBar = document.getElementById('progressBar');
+        this.navDots = document.getElementById('navDots');
+
+        this.buildNavDots();
+        this.observeSlides();
+        this.bindEvents();
+        this.updateProgress();
+    }
+
+    buildNavDots() {
+        this.slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.addEventListener('click', () => this.goToSlide(i));
+            this.navDots.appendChild(dot);
+        });
+    }
+
+    observeSlides() {
+        const slideObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const idx = parseInt(entry.target.dataset.slide) - 1;
+                    this.currentSlide = idx;
+                    this.updateProgress();
+                    this.updateDots();
+                    entry.target.querySelectorAll('.reveal').forEach(el => {
+                        el.classList.add('visible');
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        this.slides.forEach(slide => slideObserver.observe(slide));
+    }
+
+    updateProgress() {
+        const pct = ((this.currentSlide + 1) / this.totalSlides) * 100;
+        this.progressBar.style.width = pct + '%';
+    }
+
+    updateDots() {
+        this.navDots.querySelectorAll('.nav-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === this.currentSlide);
+        });
+    }
+
+    goToSlide(idx) {
+        if (idx < 0 || idx >= this.totalSlides) return;
+        this.slides[idx].scrollIntoView({ behavior: 'smooth' });
+    }
+
+    bindEvents() {
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+                e.preventDefault();
+                this.goToSlide(this.currentSlide + 1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+                e.preventDefault();
+                this.goToSlide(this.currentSlide - 1);
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                this.goToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                this.goToSlide(this.totalSlides - 1);
+            }
+        });
+
+        let touchStartY = 0;
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        document.addEventListener('touchend', (e) => {
+            const touchEndY = e.changedTouches[0].clientY;
+            const diff = touchStartY - touchEndY;
+            if (Math.abs(diff) > 50) {
+                this.goToSlide(this.currentSlide + (diff > 0 ? 1 : -1));
+            }
+        }, { passive: true });
+    }
+}
+
+new SlidePresentation();
+</script>
+
+</body>
+</html>
