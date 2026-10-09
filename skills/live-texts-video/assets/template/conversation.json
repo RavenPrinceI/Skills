@@ -1,0 +1,17 @@
+{
+  "contact": "Team",
+  "initials": "T",
+  "handle": "@team",
+  "clock": "09:41",
+  "dateLabel": "Today 09:41",
+  "accentColor": "#2878E7",
+  "showKeyboard": false,
+  "sound": true,
+  "endHold": 3,
+  "messages": [
+    {"at": 1, "side": "sent", "text": "Ready to review?", "typing": 0.7, "readAfter": 0.5},
+    {"at": 3.5, "side": "received", "text": "Here's the updated layout.", "typing": 1},
+    {"at": 5.5, "side": "received", "image": "images/layout.svg", "imageAlt": "Abstract layout with three panels", "imageFit": "contain"},
+    {"at": 9, "side": "sent", "text": "Looks good. Thanks.", "typing": 0.8, "readAfter": 0.6}
+  ]
+}

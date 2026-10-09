@@ -1,0 +1,21 @@
+{
+  "name": "remotion-live-texts-template",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.tsx",
+    "render": "node render.mjs",
+    "stills": "node render.mjs --stills",
+    "test": "node --test src/story.test.mjs src/render.test.mjs",
+    "audio": "node make-audio.mjs",
+    "validate": "node render.mjs --validate"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.531",
+    "@remotion/bundler": "4.0.531",
+    "@remotion/renderer": "4.0.531",
+    "remotion": "4.0.531",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  }
+}
