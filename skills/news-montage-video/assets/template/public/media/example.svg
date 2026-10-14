@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="750" viewBox="0 0 1000 750">
+  <rect width="1000" height="750" fill="#17201d"/>
+  <g stroke="#35423b" fill="none"><path d="M0 100H1000M0 200H1000M0 300H1000M0 400H1000M0 500H1000M0 600H1000M0 700H1000"/><path d="M100 0V750M200 0V750M300 0V750M400 0V750M500 0V750M600 0V750M700 0V750M800 0V750M900 0V750"/></g>
+  <rect x="135" y="230" width="730" height="290" rx="30" fill="#242e29" stroke="#8d9e93" stroke-width="3"/>
+  <rect x="185" y="270" width="440" height="210" fill="#101715" stroke="#65796b" stroke-width="2"/>
+  <rect x="225" y="310" width="150" height="130" fill="#2d493b" stroke="#efb65b" stroke-width="3"/>
+  <path d="M375 330H465V300H590M375 360H500V400H590M375 410H440V455H590" fill="none" stroke="#8d9e93" stroke-width="5"/>
+  <circle cx="735" cy="375" r="48" fill="#101715" stroke="#efb65b" stroke-width="4"/>
+  <text x="500" y="150" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" letter-spacing="5" fill="#efb65b">SYNTHETIC TEMPLATE ARTWORK</text>
+  <text x="500" y="615" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" fill="#a6afa9">An illustration is not incident evidence.</text>
+</svg>

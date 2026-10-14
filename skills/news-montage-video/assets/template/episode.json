@@ -1,0 +1,21 @@
+{
+  "id":"news-demo",
+  "title":"A source-led news report",
+  "series":"THE NEWS FILE",
+  "date":"SYNTHETIC DEMO",
+  "version":"TEMPLATE DEMO",
+  "fps":30,
+  "audio":"media/news-bed.wav",
+  "sources":[{"id":"demo","title":"Original template illustration","author":"Template artwork","url":"https://example.com/synthetic-demo","date":"Not a real event","checked":"Synthetic fixture only","status":"demo","notes":"This illustration and all example copy are synthetic. No real incident is represented."}],
+  "assets":[{"id":"illustration","path":"media/example.svg","kind":"image","sourceId":"demo","incidentId":"synthetic-example","credit":"ORIGINAL TEMPLATE ARTWORK · SYNTHETIC DEMO","label":"ILLUSTRATION · NOT INCIDENT EVIDENCE","reuseStatus":"owned","provenance":"Original SVG bundled with this template; depicts an abstract device.","fit":"contain"}],
+  "claims":[],
+  "scenes":[
+    {"id":"opening","type":"hook","seconds":5,"label":"01 / OPEN WITH THE EVIDENCE","headline":"Start with\nwhat we can see.","body":"A short source clip can introduce the question. This illustration is a synthetic example.","footnote":"Template demonstration · not a real event","claimIds":[],"assetIds":["illustration"]},
+    {"id":"montage","type":"montage","seconds":5,"label":"02 / KEEP THE CONTEXT","headline":"Several posts.\nHow many cases?","body":"Match reposts to their original incident before presenting them as separate reports.","footnote":"Research workflow example","claimIds":[],"assetIds":["illustration"]},
+    {"id":"closeup","type":"detail","seconds":5,"label":"03 / EXPLAIN THE DETAIL","headline":"Let the close-up\nadd information.","body":"Use the source to identify the relevant detail. Preserve context in both crops.","footnote":"Illustration · no real hardware claim","claimIds":[],"assetIds":["illustration"],"annotation":"ILLUSTRATIVE DETAIL"},
+    {"id":"explanation","type":"mechanism","seconds":6,"label":"04 / MAKE IT UNDERSTANDABLE","headline":"Collect. Check.\nThen explain.","body":"Use a few simple steps to explain the finding without adding unsupported detail.","footnote":"Example workflow diagram","claimIds":[],"assetIds":[],"items":[{"title":"COLLECT","body":"Trace original sources"},{"title":"CHECK","body":"Review claims and scope"},{"title":"EXPLAIN","body":"Show the supported finding"}]},
+    {"id":"response","type":"statement","seconds":5,"label":"05 / ATTRIBUTE THE RESPONSE","headline":"Give the source\na clear voice.","body":"Distinguish a direct quotation from an editorial summary, and retain the speaker's scope.","footnote":"Synthetic statement layout","claimIds":[],"assetIds":[],"quote":"An attributed account still needs context.","summaryLabel":"EDITORIAL SUMMARY EXAMPLE","attribution":"Synthetic layout example · not a real quotation"},
+    {"id":"limits","type":"scope","seconds":5,"label":"06 / KEEP THE LIMITS VISIBLE","headline":"Say what\nremains unknown.","body":"A useful report makes the unresolved questions as clear as the established findings.","footnote":"Example unknowns · no current incident","claimIds":[],"assetIds":[],"items":[{"title":"PROVENANCE","body":"Who recorded the original clip?"},{"title":"SCOPE","body":"What does the evidence establish?"},{"title":"TIMING","body":"When was the source captured?"}]},
+    {"id":"ending","type":"close","seconds":5,"label":"FOLLOW THE SOURCES","headline":"One story.\nA traceable record.","body":"Link the originals, preserve the research date, and keep the accompanying post aligned.","footnote":"Synthetic demonstration · replace with your researched episode","claimIds":[],"assetIds":[],"items":[{"title":"Original uploads","body":"Creator and capture date"},{"title":"Primary statements","body":"Exact scope and date"},{"title":"Source notes","body":"Known limits and corrections"}]}
+  ]
+}

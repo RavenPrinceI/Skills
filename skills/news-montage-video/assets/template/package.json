@@ -1,0 +1,23 @@
+{
+  "name": "remotion-news-montage-template",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "audio": "node scripts/make-audio.mjs",
+    "validate": "node render.mjs --validate",
+    "test": "node --test src/episode.test.mjs",
+    "studio": "remotion studio src/index.tsx",
+    "stills": "node render.mjs --stills",
+    "render": "node render.mjs",
+    "verify": "node scripts/verify.mjs"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.531",
+    "@remotion/cli": "4.0.531",
+    "@remotion/renderer": "4.0.531",
+    "remotion": "4.0.531",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "zod": "4.5.4"
+  }
+}
